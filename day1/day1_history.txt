@@ -76,3 +76,97 @@ history | awk '{ $1 > 7}
 history | awk '{ $1 > 7}'
 history | awk '$1 > 7'
 history | awk '$1 > 7' | cut -c 8- > day1_history.txt
+vi day1_history.txt
+git add .
+git commit -m "Add day1 history file"
+git push
+cd
+kubectl get nodes 
+kubectl expose --help
+ip a
+kubectl get pods --all-namespaces 
+sudo vi /etc/kubernetes/manifests/etcd.yaml 
+kubectl -n kube-system exec -it etcd-master -- sh -c "ETCDCTL_API=3 \
+_CACERT=/etc/kubernetes/pki/etcd/ca.crt \ 
+_CERT=/etc/kubernetes/pki/etcd/server.crt \ 
+_KEY=/etc/kubernetes/pki/etcd/server.key \
+ endpoint health"
+kubectl -n kube-system exec -it etcd-master -- sh -c "ETCDCTL_API=3 \
+_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
+_CERT=/etc/kubernetes/pki/etcd/server.crt \
+_KEY=/etc/kubernetes/pki/etcd/server.key \
+ endpoint health"
+kubectl -n kube-system exec -it etcd-master -- sh -c "ETCDCTL_API=3 \
+_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
+_CERT=/etc/kubernetes/pki/etcd/server.crt \
+_KEY=/etc/kubernetes/pki/etcd/server.key \
+ --endpoints=https://127.0.0.1:2379 member list"
+kubectl -n kube-system exec -it etcd-master -- sh -c "ETCDCTL_API=3 \
+_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
+_CERT=/etc/kubernetes/pki/etcd/server.crt \
+_KEY=/etc/kubernetes/pki/etcd/server.key \
+ --endpoints=https://127.0.0.1:2379 member list -w table"
+kubectl -n kube-system exec -it etcd-master -- sh -c "ETCDCTL_API=3 \
+_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
+_CERT=/etc/kubernetes/pki/etcd/server.crt \
+_KEY=/etc/kubernetes/pki/etcd/server.key \
+ --endpoints=https://127.0.0.1:2379 snapshot save /var/lib/etcd/snapshot.db"
+kubectl -n kube-system exec -it etcd-master -- sh
+sudo ls -l /var/lib/etcd/
+sudo systemctl status etcd
+sudo systemctl status kubelet
+sudo cp /var/lib/etcd/snapshot.db .
+ls -la
+ls -lah snapshot.db 
+cd /var/lib/etcd/
+ls
+sudo -i
+kubectl get pods -n kube-system 
+kubectl create deployment nginx --image=nginx
+kubec get pods
+kubecc get pods
+kubectl get deploy
+kubectl get pod
+kubectl get pods
+kubectl get deploy
+kubectl get pods -n kube-system 
+sudo ETCDCTL=3 etcdct snapshot restore snapshot.db --initial-cluter etcd-restore=https://192.168.1.100:2380 --initial-advertise-peer-urls https://192.168.1.100:2380 --name etcd-restore --data-dir /var/lib/etcd
+sudo ETCDCTL=3 etcdctl snapshot restore snapshot.db --initial-cluter etcd-restore=https://192.168.1.100:2380 --initial-advertise-peer-urls https://192.168.1.100:2380 --name etcd-restore --data-dir /var/lib/etcd
+apt-get install etcdctl
+sudo apt-get install etcdctl
+sudo -i
+sudo ETCDCTL=3 etcdctl snapshot restore snapshot.db --initial-cluter etcd-restore=https://192.168.1.100:2380 --initial-advertise-peer-urls https://192.168.1.100:2380 --name etcd-restore --data-dir /var/lib/etcd
+systemctl status etcd
+ls -la
+sudo chown student. snapshot.db 
+sudo ETCDCTL=3 etcdctl snapshot restore snapshot.db --initial-cluter etcd-restore=https://192.168.1.100:2380 --initial-advertise-peer-urls https://192.168.1.100:2380 --name etcd-restore --data-dir /var/lib/etcd
+ls -la
+etcdctl --help
+sudo ETCDCTL_API=3 etcdctl snapshot restore snapshot.db --initial-cluter etcd-restore=https://192.168.1.100:2380 --initial-advertise-peer-urls https://192.168.1.100:2380 --name etcd-restore --data-dir /var/lib/etcd
+sudo ETCDCTL_API=3 etcdctl snapshot restore snapshot.db --initial-cluster etcd-restore=https://192.168.1.100:2380 --initial-advertise-peer-urls https://192.168.1.100:2380 --name etcd-restore --data-dir=/var/lib/etcd
+cd /var/lib/etcd/
+sudo -i
+kubectl get nodes
+kubectl get pods -n --all-namespaces
+systemctl restart kubelet
+sudo systemctl restart kubelet
+kubectl get pods -n --all-namespaces
+kubectl get pods --all-namespaces
+ls /var/lib/etcd/
+sudo ls /var/lib/etcd/
+sudo ls /var/lib/etcd/mem
+sudo ls /var/lib/etcd/member
+kubectl get pods --all-namespaces
+kubectl create deployment nginx --image=nginx
+kubectl get deploy
+kubectl -n kube-system exec -it etcd-master -- sh -c "ETCDCTL_API=3 \
+_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
+_CERT=/etc/kubernetes/pki/etcd/server.crt \
+_KEY=/etc/kubernetes/pki/etcd/server.key \
+ --endpoints=https://127.0.0.1:2379 member list -w table"
+kubectl -n kube-system exec -it etcd-master -- sh -c "ETCDCTL_API=3 \
+_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
+_CERT=/etc/kubernetes/pki/etcd/server.crt \
+_KEY=/etc/kubernetes/pki/etcd/server.key \
+ endpoint health"
+history | awk '$1 > 7' | cut -c 8- > day1_history.txt 
