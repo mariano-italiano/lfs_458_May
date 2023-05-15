@@ -1,0 +1,78 @@
+sudo unshare -h
+sudo unshare --fork --pid --mount-proc bash
+sudo -i
+sudo -i 
+ls -la
+mkdir .kube
+sudo cp -rp /etc/kubernetes/admin.conf .kube/config
+ls -la .kube/config
+sudo chown -R .kube student:student
+sudo chown -R .kube/config student:student
+ls -la
+sudo chown -R student:student .kube/
+ls -la .kube/
+kubectl get nodes
+less .kube/config
+echo 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1EVXhOVEE1TXpFeU9Wb1hEVE16TURVeE1qQTVNekV5T1Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBS2lrCjJOdDJLbGR1cEpMWnVlYURZWSsvajBhTzUzWkVDR1h0cC9TRFBsK2xCRjNFUUZDVEhER0g5Y21OeWtBYkd4VEwKbnJ2bUhIRTFIa2k0ODRRU0dha0tvYmdmYkMwc1BtOHlOdWJ1ckJuRCt5R1dnMzVuYUh5Vml6T2lYbUR2bmszdworbkM3Q0dvK0NXQ2pkOVh5cnZnM2pFMGU3T00xSk9TT21ua082UlY1dzJuaEpQbHg1TlVnYm9GZDZ1aXpjOUVZCllsWnhQZzdROEc4SnBhNzcweW9QM3RHNHVNN05XN0F3OFREbllyR2ZMQTZIMU56NnVxQm91SkZHdGVwbE9HZDgKS3ZGRXdIRFQ3TGk2dFFjY3UxYWQ5cE5FK2s5cHdZR2dWV3R0cS9KWERBM3dRU0xBc0YvMVc2L1l2MU16VjJDagphQ2tkMDhPcDFaUVBlWGgzUDcwQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZPQUhxU1MwYXVBQUdMcDhzc2hMUGJkWGlkcWRNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBSE9tUDlxc3VEblZQNDAzazBWVwo3c0h6S1UzS0lxajBadHlOWVFjcC9Lc2ZwZTJSOTdSSDNIbjlTR2ttOFZmMmgrZFo3MitEc1BaVkp0SU5wTzE0CjJ4WG9IMXpiOFpsck1EODZ6Q1VMUWI3M0xTVHhVZkdSVWU2WkY2N09CZGxxY1hwWElzQjZNTjRxY0RvMW13ZG4KblpvUXMvaG1CVVZNOWdzTG5QNWN5d2VZNFlnNW9YdGFnZ2dYc0kxWlFtTEJZc2pwVE9EaVZXanB5cHFkbkcyMApTTzRoSm5FRzRST01JWWRvQ2JGcTJsb2hYbm50aGpVbmFaR2cvaDE1djlrd1FGM0pqV01BNjF6QlN6bk1XZkZnCnlXaXRGNkdrUW5wU0g2bS9XSk5IekxpQngxK0JmL01oRWllb3FXd0dOMW5TckpSMHM3VWh1ZFJwcHZmQWRkWjkKbGgwPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==' | base64 -d
+less .kube/config
+kubectl get config
+kubectl config view
+3t51x7.i50jtgqktmyn9m2c
+kubectl token list
+kubeadm token list
+kubectl get nodes
+kubectl create deployment nginx --image=nginx
+kubectl get pods
+kubectl get deployments
+kubectl delete deploy nginx
+kubectl get deployments
+kubectl get pods
+kubectl get deployments
+kubectl get nodes
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+wget https://docs.projectcalico.org/manifests/calico.yaml
+wget https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml
+kubectl apply -f calico.yaml 
+kubectl get nodes
+kubectl get pods -n kube-system 
+kubectl get namespaces
+kubectl get pods -n kube-system -o wide
+kubectl get nodes
+kubectl create deployment nginx --image=nginx
+kubectl get deploy
+kubectl get pods
+kubectl delete deploy nginx
+kubectl get nodes
+kubectl create deployment nginx --image=nginx --dry-run=client -o yaml
+kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > deployment1.yml
+kubectl apply -f deployment1.yml 
+kubectl delete deployment nginx
+kubec get deploy
+kubectl get deploy
+kubectl get ns
+kubectl get svc
+kubectl get nodes
+sudo cat /root/
+sudo cat /root/kubeadm-config.yaml
+kubectl get nodes
+kubectl cluster-info
+kubectl cluster-info dump
+kubectl get nods --all-namespaces
+kubectl get pods --all-namespaces
+sudo apt-get install bash-completion -y
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> $HOME/.bashrc
+history
+git config --global credential.helper store
+git config --global user.email 'markuj5@gmail.com'
+git clone https://github.com/mariano-italiano/lfs_458_May.git
+cd lfs_458_May/
+mkdir day1
+ls
+mv installWorker day1/
+mv kubeadm-config.yaml day1/
+cd day1
+history | awk '{ $1 > 7}
+history | awk '{ $1 > 7}'
+history | awk '$1 > 7'
+history | awk '$1 > 7' | cut -c 8- > day1_history.txt
