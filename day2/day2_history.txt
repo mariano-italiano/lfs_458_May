@@ -233,3 +233,175 @@ cp -rp ../*.yml day2/
 cd day2
 ls -la
 history | awk '$1>29' | cut -c 8- > day2_history.txt
+vi day2_history.txt
+cd
+cd lfs_458_May/
+git add .
+git commit -m "Adding day2 files"
+git push
+cd
+vi sidecar-pod.yml
+kubectl apply -f sidecar-pod.yml
+kubectl get pod
+kubectl exec -it sidecar-pod -- /bin/sh
+kubectl exec -it sidecar-pod -c busybox1 -- /bin/sh
+kubectl exec -it sidecar-pod -c busybox2 -- /bin/sh
+kubectl delete pod sidecar-pod 
+kubectl apply -f sidecar-pod.yml
+kubectl exec -it sidecar-pod -c busybox2 -- /bin/sh
+vi init-pod.yml
+kubectl get pods
+kubectl delete pods --all
+kubectl apply -f init-pod.yml 
+vi init-pod.yml
+kubectl apply -f init-pod.yml 
+kubectl get pod
+watch -n1 kubectl get pod
+vi web.yml
+vi web-svc.yml
+kubectl apply -f web.yml 
+kubectl get pods
+kubectl apply -f web-svc.yml 
+kubectl get svc
+kubectl get pods
+watch -n1 kubectl get pods
+kubectl get pods --show-
+kubectl get pods --show-labels 
+kubectl label pod web app=web-svc
+kubectl get pods --show-labels 
+kubectl get pods
+kubectl events web
+kubectl get pods
+kubectl exec -it web -c svc-check -- sh
+kubectl edit pod web
+kubectl get pods
+kubectl logs web
+kubectl exec -it web -c svc-check -- sh
+kubectl get svc
+kubectl logs web -c svc-check
+kubectl get pods
+kubectl exec -it web -c svc-check -- sh
+kubectl delete pod web
+vi web.yml 
+kubectl apply -f web-svc.yml 
+kubectl apply -f web.yml 
+kubectl get pods
+vi web.yml 
+kubectl apply -f web.yml 
+kubectl get pods
+kubectl exec -it web -c svc-check -- sh
+kubectl exec -it web -c svc-check -- bash
+kubectl get pods
+kubectl delete pod web
+kubectl delete service web-svc 
+kubectl get pods
+kubectl apply -f web.yml 
+kubectl get pods
+kubectl exec -it web -c svc-check -- bash
+kubectl exec -it web -c svc-check -- sh
+kubectl get pods
+kubectl apply -f web-svc.yml 
+watch -n1 kubectl get pods
+kubectl delete svc web-svc
+kubectl delete pod web 
+vi web.yml 
+kubectl apply -f web.yml
+kubec get pods
+kubectl get pods
+vi web.yml 
+kubectl get pods
+kubectl get svc
+kubectl apply -f web-svc.yml 
+kubectl get pods
+watch -n1 kubectl get pods
+ls -la /etc/kubernetes/manifests
+kubectl get pods
+kubectl edit pod my-static-pod-worker01
+kubectl get pods
+kubectl delete pod my-static-pod-worker01
+kubectl get pods
+vi web-svc.yml 
+vi web
+vi web.yml 
+kubectl get endpoints
+kubectl get endpoints -o wide
+kubectl delete pods -all
+kubectl delete pods --all
+kubectl get pods
+vi user-db.yml
+kubectl apply -f user-db.yml
+kubec get pods
+kubectl get pods
+vi user-db-svc.yml 
+kubectl apply -f user-db-svc.yml
+kubectl exec -it user-db -- curl user-db-svc
+kubectl get service
+vi user-db-svc.yml 
+kubectl expose pod user-db --type NodePort --port 80
+kubectl get svc
+kubectl exec -it user-db -- curl user-db
+ip a
+cp user-db-svc.yml user-db-lb.yml
+vi user-db-lb.yml
+rm user-db-lb.yml
+kubectl expose pod user-db --name user-db-lb --port 80 --type LoadBalancer --external-ip 192.168.1.100 --dry-run=client -o yaml
+vi user-db-lb.yml
+kubectl apply -f user-db-lb.yml 
+kubectl get svc
+kubectl get pods -n kube-system 
+kubectl get pod coredns-787d4945fb-4b6zk -o yaml
+kubectl get pod coredns-787d4945fb-4b6zk -n kube-system -o yaml
+kubectl get ns
+vi web-svc.yml 
+vi devops-svc.yml 
+kubectl create -f devops-svc.yml -n devops-ns 
+kubectl exec -it user-db -- curl user-db
+kubectl exec -it user-db -- sh
+kubectl exec -it web -- sh
+kubectl get pods
+kubectl -f web.yml 
+kubectl apply -f web.yml 
+kubectl exec -it web -- sh
+kubectl apply -f web-svc.yml 
+kubectl exec -it web -- sh
+kubectl exec -it user-db -- sh
+vi test-pod.yml 
+kubectl apply -f test-pod.yml 
+kubectl exec -it test-pod -- bash
+kubectl exec -it test-pod -- sh
+kubectl exec -it test-pod -- bash
+kubectl exec -it test-pod -- sh
+vi liveness-pod.yml
+kubectl apply -f liveness-pod.yml
+kubectl get pods
+watch -n1 kubectl describe pod liveness-pod
+kubectl describe pod liveness-pod
+cp liveness-pod.yml readiness-pod.yml
+vi readiness-pod.yml
+kubectl applt -f readiness-pod.yml 
+kubectl appyt -f readiness-pod.yml 
+kubectl apply -f readiness-pod.yml 
+kubectl describe pod readiness-pod 
+kubectl get pods
+watch -n1 kubectl get pods
+kubectl describe pod readiness-pod 
+watch -n1 kubectl get pods
+cp -rp liveness-pod.yml startup-pod.yml
+vi startup-pod.yml
+kubectl apply -f startup-pod.yml 
+vi startup-pod.yml
+kubectl apply -f startup-pod.yml 
+kubectl get pods
+kubectl describe pod startup-pod 
+kubectl exec -it startup-pod -- sh
+kubectl get pods
+watch -n1 kubectl get pods
+kubectl delete pod startup-pod 
+vi startup-pod.yml
+kubectl apply -f startup-pod.yml 
+kubectl get pods
+kubectl describe pod startup-pod 
+kubectl get pods
+history
+cd lfs_458_May/day2/
+history | awk '$1>29' | cut -c 8- > day2_history.txt
