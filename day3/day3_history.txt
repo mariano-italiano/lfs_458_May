@@ -1,0 +1,409 @@
+kubectl get nodes 
+vi lifecycle.yml
+kubectl apply -f lifecycle.yml
+kubectl get pods -o wide
+kubectl delete pod,svc --all
+kubectl get deploy
+kubectl get pods -o wide
+cd /tmp
+wget https://training.linuxfoundation.org/cm/LFS458/LFS458 V1.26.1 SOLUTIONS.tar.xz n
+--user=LFtraining --password=Penguin2014
+cd
+vi replica-set.yml
+kubectl apply -f replica-set.yml
+vi replica-set.yml
+kubectl apply -f replica-set.yml
+kubectl get replicasets.apps 
+kubectl get replicasets.apps -o wide
+kubectl get pods
+kubectl get pods -o wide
+kubectl scale rs replica-set --replicas=4
+kubectl get pods -o wide
+kubectl scale rs replica-set --replicas=0
+kubectl get pods -o wide
+kubectl scale rs replica-set --replicas=3
+kubectl get pods -o wide
+kubectl delete pod replica-set-54lm8
+kubectl get pods -o wide
+kubectl autoscale replicaset -h
+kubectl get rs
+kubectl get rs,pod
+kubectl delete rs replica-set 
+kubectl get rs,pod
+vi my-deployment.yml
+kubectl apply -f my-deployment.yml
+vi my-deployment.yml
+kubectl apply -f my-deployment.yml
+kubectl get deploy
+kubectl get deployments.apps 
+kubectl get deployments.apps,pod
+kubectl scale deployment my-deployment --replicas 5
+kubectl get deployments.apps,pod
+kubectl get deployments.apps my-deployment 
+kubectl describe deployments.apps my-deployment 
+kubectl get deployments.apps my-deployment -o yaml
+kubectl edit deployments.apps my-deployment 
+kubectl get deployments.apps my-deployment -o yaml
+kubectl get deployments.apps my-deployment -o yaml|grep generation
+kubectl scale deployment my-deployment --replicas 5
+kubectl get deployments.apps my-deployment -o yaml|grep generation
+kubectl rollout status
+kubectl rollout status deployment my-deployment 
+kubectl rollout history deployment my-deployment 
+kubectl get deployments.apps,pod
+kubectl scale deployment my-deployment --replicas 4 --record
+kubectl rollout history deployment my-deployment 
+vi my-deployment.yml 
+kubectl apply -f my-deployment.yml --record
+kubectl rollout history deployment my-deployment 
+kubectl rollout status deployment my-deployment 
+kubectl describe deployment my-deployment 
+kubectl edit deployments.apps my-deployment 
+kubectl get deployments.apps,pod
+kubectl rollout status deployment my-deployment 
+kubectl rollout history deployment my-deployment 
+kubectl edit deployments.apps my-deployment 
+kubectl rollout history deployment my-deployment 
+kubectl annotate deployments.apps my-deployment kubernetes/io/change-cause="dodanie env test"
+kubectl annotate deployments.apps my-deployment kubernetes.io/change-cause="dodanie env test"
+kubectl rollout history deployment my-deployment 
+kubectl describe deployments.apps my-deployment 
+kubectl get pods
+kubectl exec -it my-deployment-7fc95b4595-576zx -- sh
+kubectl rollout history deployment my-deployment 
+kubectl rollout undo deployment my-deployment --to-revision 2
+kubectl rollout history deployment my-deployment 
+kubectl annotate deployments.apps my-deployment kubernetes.io/change-cause="rollback to nginx 1.19.2"
+kubectl rollout history deployment my-deployment 
+kubectl get pods
+kubectl exec -it my-deployment-5f87ff76f5-tts7m -- sh
+kubectl get deployments.apps my-deployment -o wide
+kubectl logs -l app=my-deployment
+vi my-deployment.yml 
+kubectl edit deployments.apps my-deployment 
+watch -n1 kubectl get deployments.apps,pods
+kubectl rollout status deployment my-deployment 
+vi my-daemonset.yml
+kubectl apply -f my-daemonset.yml 
+kubectl get ds
+kubectl get ds,pods
+kubectl delete deployments.apps my-deployment 
+kubectl get ds,pods
+kubectl get ds,pods -o wide
+vi stfs-service.yml
+vi nginx-stfs.yml
+cat stfs-service.yml 
+cat nginx-stfs.yml 
+cat stfs-service.yml  > statefulset.yml
+vi statefulset.yml
+cat nginx-stfs.yml > statefulset.yml
+vi statefulset.yml
+cat stfs-service.yml  > statefulset.yml
+echo "---" >> statefulset.yml
+cat nginx-stfs.yml > statefulset.yml
+vi statefulset.yml
+cat stfs-service.yml  > statefulset.yml
+echo "---" >> statefulset.yml
+cat nginx-stfs.yml >> statefulset.yml
+vi statefulset.yml
+kubectl apply -f statefulset.yml
+kubectl get pods,statefulsets.apps 
+kubectl scale statefulset nginx-stfs --replicas 5
+kubectl get pods,statefulsets.apps 
+kubectl delete statefulsets.apps nginx-stfs 
+kubectl apply -f statefulset.yml
+kubectl scale statefulset nginx-stfs --replicas 6
+kubectl scale statefulset nginx-stfs --replicas 3
+kubectl get deploy
+kubectl apply -f my-deployment.yml 
+kubectl get deploy
+kubectl scale deployment my-deployment --replicas 4
+kubectl get deploy
+kubectl get deploy my-deployment -o yaml |grep generation
+kubectl rollout undo deployment my-deployment --to-revision 1
+kubectl get deploy my-deployment -o yaml 
+kubectl rollout undo deployment my-deployment --to-revision 1
+kubectl logs --help
+kubectl logs --previous
+kubectl logs my-deployment-f56c6b8b6-8vxbm --previous
+kubectl logs my-deployment-f56c6b8b6-5l5g9 -previous
+kubectl logs my-deployment-f56c6b8b6-5l5g9 --previous
+kubec get deploy
+kubectl get deploy
+kubectl autoscale -h
+kubectl autoscale deployment my-deployment --min=2 --max=10 --cpu-percent=50
+kubectl get deploy
+sudo apt-get install -y stress-ng
+stress-ng 
+stress-ng --help
+stress-ng --cpu 8 --io 4 --vm 2 --vm-bytes 128M --fork 4 --timeout 600s
+stress-ng --cpu 8 --io 4 --vm 2 --vm-bytes 128M --fork 4 --timeout 600s &
+htop
+sudo apt-get install -y htop
+htop
+kubectl get deploy
+kubectl autoscale deployment my-deployment --max=10 --cpu-percent=40
+kubec get pods -o wide
+kubectl get pods -o wide
+kubectl get hpa
+kubectl delete hpa my-deployment 
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.0/deploy/static/provider/baremetal/deploy.yaml
+kubectl get services -n ingress-nginx
+kubectl -n ingress-nginx annotate ingressclasses nginx ingressclass.kubernetes.io/is-default-class="true"
+vi ingress.yml
+kubectl apply -f ingress.yml 
+kubectl  get deploy
+kubectl  get deploy -n app1
+kubectl get all -n app1 -o wide
+kubectl get all,ingress -n app1 -o wide
+curl http://192.168.1.110:32417 -H 'Host: app1.example.com'
+curl http://192.168.1.110:32417
+curl http://192.168.1.110:32417 -H 'Host: app1.example.com'
+kubectl edit service ingress-nginx-controller -n ingress-nginx
+kubectl edit deployments.apps 
+kubectl edit deployments.apps -n app1 app1 
+curl http://192.168.1.130 -H 'Host: app1.example.com'
+curl http://192.168.1.2000 -H 'Host: app1.example.com'
+curl http://192.168.1.200 -H 'Host: app1.example.com'
+kubectl get svc -n ingress-nginx 
+kubectl edit ingress -n app1 app1-ingress 
+curl http://192.168.1.200 -H 'Host: app1.192.168.1.200.nip.io'
+curl http://192.168.1.200/status -H 'Host: app1.192.168.1.200.nip.io'
+kubectl -n app1 edit svc app1-service 
+kubectl -n app1 edit ingress app1-ingress 
+curl http://192.168.1.200/status -H 'Host: app1.192.168.1.200.nip.io'
+vi volume-pod.yml\
+vi volume-pod.yml
+kubectl apply -f volume-pod.yml
+kubectl get pods -o wide
+kubectl delete deployments.apps,ds --all
+kubectl get pods -o wide
+kubectl delete deployments.apps,ds,st --all
+kubectl delete deployments.apps,ds,statefulsets.apps --all
+kubectl get pods -o wide
+kubectl exec -it volume-pod -- sh
+vi sidecar-pod.yml 
+vi test-pv.yml
+vi test-pvc.yml
+kubectl apply -f test-pv.yml 
+kubectl  get pv
+kubectl apply -f test-pvc.yml 
+kubec get pvc
+kubectl get pvc
+kubectl  get pv
+vi test-nginx.yml
+kubectl apply -f test-nginx.yml
+mv test-nginx.yml test-volume-nginx.yml
+kubec get pods,deploy
+kubectl get pods,deploy
+kubectl exec -it test-volume-nginx-78c889886c-d6sbr -- sh
+kubectl get pods,deploy -o wide
+ls -la /files
+vi test-pv.yml 
+kubectl delete deployments.apps test-volume-nginx 
+kubectl get pvc
+kubectl get pv
+kubectl delete pvc test-pvc 
+kubectl get pvc,pv
+kubectl apply -f test-pvc.yml 
+kubectl get pvc,pv
+vi test-pv.yml 
+kubectl delete pv,pvc --all
+vi recycle-pv.yml
+cp test-pvc.yml recycle-pvc.yml
+vi recycle-pvc.yml
+kubectl get pods
+kubectl delete pod volume-pod  
+kubectl apply -f recycle-pv.yml 
+kubectl apply -f recycle-pvc.yml 
+kubectl get pv,pvc
+vi test-volume-nginx.yml 
+kubectl apply -f test-volume-nginx.yml
+kubectl exec -it test-volume-nginx-945f585bd-8t4pf -- sh
+kubectl get pods -o wide
+kubectl delete deployments.apps test-volume-nginx 
+kubectl delete pvc recycle-pvc 
+kubectl get pv
+kubectl get pvc
+vi recycle-pv.yml 
+kubectl  get pv
+cp recycle-pv.yml delete-pv.yml
+vi delete-pv.yml
+cp recycle-pvc.yml delete-pvc.yml
+vi delete-pvc.yml
+kubectl apply -f delete-pv.yml 
+kubec get pv
+kubectl get pv
+kubectl delete pv recycle-pv 
+kubectl get pv
+kubectl apply -f delete-pvc.yml 
+kubectl get pv,pvc
+vi test-volume-nginx.yml 
+kubectl apply -f test-volume-nginx.yml 
+kubectl get po -o w
+kubectl get po -o wide
+kubectl delete deployments.apps test-volume-nginx 
+kubectl get pv,pvc
+kubectl delete pvc delete-pvc 
+kubectl get pv,pvc
+vi gold-sc.yml
+kubectl apply -f gold-sc.yml 
+vi gold-sc.yml
+kubectl apply -f gold-sc.yml 
+vi test-pv.yml gold-sc-pv.yml
+vi gold-sc-pv.yml
+vi test-pv.yml 
+vi gold-sc-pv.yml
+vi gold-sc-pvc.yml
+kubectl apply -f gold-sc-pv.yml 
+kubectl apply -f gold-sc-pvc.yml 
+vi gold-sc-pvc.yml
+kubectl apply -f gold-sc-pvc.yml 
+kubectl get pv
+kubectl get pv,pvc,sc
+vi gold-sc
+vi gold-sc.yml 
+vi gold-sc-pv.yml 
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+vi my-configmap.yml
+kubectl get nodes
+kubectl get pods
+kubectl get cm
+kubectl create cm my-configmap --from-literal key1=value1 --dry-run client -o yaml
+kubectl create cm my-configmap --from-literal key1=value1 --dry-run=client -o yaml
+kubectl create cm my-configmap --from-literal key1=value1 --dry-run=client -o yaml > my-configmap.yml 
+vi my-configmap.yml
+kubectl apply -f my-configmap.yml
+kubectl create cm my-configmap --from-literal key1=value1 
+kubectl edit cm my-configmap 
+kubectl describe cm my-configmap 
+kubectl edit cm my-configmap 
+vi file
+mv file env-file-example
+kubectl create cm --from-file env-file-example 
+kubectl create cm --from-file=env-file-example 
+kubectl create cm fromenv --from-file=env-file-example 
+kubectl describe cm fromenv 
+vi config.json
+kubectl create cm configuration --from-file config.json 
+kubectl describe cm configuration 
+kubectl edit cm configuration 
+mkdir configMaps
+cd configMaps
+touch httpd.conf
+vi httpd.conf
+vi index.html
+cd ..
+kubectl create cm httpConf --from-file configMaps/
+kubectl create cm my-http --from-file configMaps/
+kubectl describe cm my-http 
+kubectl get cm my-configmap -o yaml
+kubectl get cm
+vi configmap-pod.yml
+kubectl describe cm configuration 
+vi configmap-pod.yml
+kubectl apply -f configmap-pod.yml
+vi configmap-pod.yml
+kubectl apply -f configmap-pod.yml
+vi configmap-pod.yml
+kubectl apply -f configmap-pod.yml
+kubectl exec -it configmap-pod -- sh
+vi configmap-pod.yml
+kubectl log configmap-pod.yml 
+kubectl log configmap-pod
+kubectl logs configmap-pod
+vi configmap-pod.yml
+vi configmap-volume-pod.yml 
+kubectl apply -f configmap-volume-pod.yml
+kubectl exec -it configmap-volume-pod -- sh
+kubectl edit pod configmap-volume-pod 
+kubectl delete  pod configmap-volume-pod
+vi configmap-volume-pod.yml 
+kubectl apply -f configmap-volume-pod.yml
+kubectl exec -it configmap-volume-pod -- sh
+kubectl delete  pod configmap-volume-pod
+vi configmap-volume-pod.yml 
+kubectl apply -f configmap-volume-pod.yml
+kubectl exec -it configmap-volume-pod -- sh
+mkdir lfs_458_May/day3
+cp *.yml lfs_458_May/day3/
+ls
+rm lfs_458_May/day3/*.yml
+diff . lfs_458_May/day2/
+ls lfs_458_May/day2/
+ls lfs_458_May/day2/ -la
+mv apiuser-clusterrole.yml lfs_458_May/day2/
+mv dep1.yml lfs_458_May/day2/
+mv devops-rolebinding.yml lfs_458_May/day2/
+mv devops-role.yml lfs_458_May/day2/
+mv devops-svc.yml lfs_458_May/day2/
+mv init-pod.yml lfs_458_May/day2/
+mv liveness-pod.yml lfs_458_May/day2/
+mv marcin-pod.yml lfs_458_May/day2/
+mv my-pod.yml lfs_458_May/day2/
+mv readiness-pod.yml lfs_458_May/day2/
+mv sidecar-pod.yml lfs_458_May/day2/
+mv startup-pod.yml lfs_458_May/day2/
+mv test2-pod.yml lfs_458_May/day2/
+mv test-pod.yml lfs_458_May/day2/
+mv user-db-lb.yml lfs_458_May/day2/
+mv user-db-svc.yml lfs_458_May/day2/
+mv user-db.yml lfs_458_May/day2/
+mv user-request-devops.yml lfs_458_May/day2/
+mv web-svc.yml lfs_458_May/day2/
+mv web.yml lfs_458_May/day2/
+ls -la
+ls -la *.yml
+la -al  lfs_458_May/day2/
+mv *.yml lfs_458_May/day3/
+ls -la
+ls -latr
+ls -la lfs_458_May/day1/
+mv config-devops lfs_458_May/day1/
+cd lfs_458_May/
+git status
+history
+history | awk '$1>445' | cut -c 8- > day3/day3_history.txt
