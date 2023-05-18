@@ -1,0 +1,500 @@
+echo -n "mysecretpassword" | base64
+echo -n "password123" | base64
+kubectl create secret generic myfirst-secret --from-literal administrator=mysecretpassword 
+kubectl describe secrets myfirst-secret 
+kubectl get secrets myfirst-secret 
+kubectl get secrets myfirst-secret -o yaml
+vi my-secret.yml
+echo root | base64
+vi my-secret.yml
+kubectl apply -f my-secret.yml
+kubectl describe secrets my-secret 
+vi mariadb-root
+kubectl create secret generic mariadb-pass --from-file mariadb-root 
+kubectl describe secrets mariadb-pass -o yaml
+kubectl get secrets mariadb-pass -o yaml
+kubectl get secrets mariadb-pass -o yaml | grep mariadb
+kubectl get secrets mariadb-pass -o yaml | grep mariadb | head -n1
+kubectl get secrets mariadb-pass -o yaml | grep mariadb | head -n1 | cut -d ":" -f 2
+kubectl get secrets mariadb-pass -o yaml | grep mariadb | head -n1 | cut -d ":" -f 2 | base64 -d
+kubectl get secrets mariadb-pass -o yaml | grep mariadb | head -n1 | cut -d ":" -f 2 | cut -c 1- | base64 -d
+kubectl get secrets mariadb-pass -o yaml | grep mariadb | head -n1 | cut -d ":" -f 2 | cut -c 1- 
+kubectl get secrets mariadb-pass -o yaml | grep mariadb | head -n1 | cut -d ":" -f 2 | cut -c 2- 
+kubectl get secrets mariadb-pass -o yaml | grep mariadb | head -n1 | cut -d ":" -f 2 | cut -c 2- | base64 -d
+vi secret-pod.yml
+kubectl get pods
+kubectl get deploy
+kubectl delete pod --all
+kubectl apply -f secret-pod.yml
+vi secret-pod.yml
+kubectl apply -f secret-pod.yml
+kubectl get pods
+kubectl logs secret-pod 
+vi secret-pod.yml
+kubectl apply -f secret-pod.yml
+kubectl delete pod secret-pod 
+kubectl apply -f secret-pod.yml
+kubectl exec -it secret-pod -- sh
+echo admin | base64
+kubectl edit secrets my-secret 
+kubectl exec -it secret-pod -- sh
+htpasswd
+sudo apt install apache2-utils -y
+htpasswd -c .htpasswd marcin
+cat .htpasswd 
+kubectl create secret generic nginx-htpasswd --from-file .htpasswd 
+kubectl get secret nginx-htpasswd 
+rm .htpasswd 
+vi nginx-config.yml
+kubectl  apply -f nginx-config.yml
+vi nginx-pod.yml
+kubectl get cm nginx-config 
+kubectl describe cm nginx-config 
+vi nginx-pod.yml
+kubectl apply -f nginx-pod.yml
+kuebcget pods
+kube get pods
+kubectl get pods
+kubectl get pods -o wide
+curl http://192.168.5.5
+curl http://192.168.5.5 -u marcin:student
+curl http://192.168.5.5 -u root:student
+ls -la
+ls -la *.yml
+kubectl label nodes worker02 web-services=true
+kubectl get nodes --show-labels 
+vi web-pod.yml
+kubectl apply -f web-pod.yml
+kubec get pods -o wide
+kubecc get pods -o wide
+kubectl get pods -o wide
+vi web-deploy.yml
+kubectl apply -f web-deploy.yml
+kubectl get pods -o wide
+kubectl label nodes worker02 web-services-
+kubectl scale deployment web-deploy --replicas 0
+kubectl scale deployment web-deploy --replicas 3
+kubectl get pods -o wide
+kubectl edit deployments.apps web-deploy 
+kubectl get pods -o wide
+kubectl get nodes --show-labels 
+kubectl get nodes -o yaml
+kubectl get nodes -o yaml | grep taint
+kubectl get nodes -o yaml | grep taint -A 10
+kubectl get nodes -o json | jq '.items[].spec.taints'
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+kubectl taint nodes worker02 key1=value1:NoSchedule
+vi noschedule-pod1.yml
+cp noschedule-pod1.yml noschedule-pod2.yml
+vi noschedule-pod2.yml
+kubectl apply -f noschedule-pod*
+kubectl apply -f noschedule-pod1.yml 
+kubectl apply -f noschedule-pod2.yml 
+kubectl get pods -o wide
+cp noschedule-pod1.yml noschedule-pod3.yml
+vi noschedule-pod3.yml
+kubectl apply -f noschedule-pod3.yml
+kubectl get pods -o wide
+kubectl delete pod,deploy --all
+kubectl apply -f noschedule-pod1.yml 
+kubec get pods -o wide
+kubectl get pods -o wide
+kubectl taint nodes worker02 key1=value1:NoExecute
+kubectl taint nodes worker02 key2=value2:NoSchedule
+kubectl get pods -o wide
+vi noschedule-pod1.yml 
+kubectl get pods -o wide
+kubectl taint nodes worker02 key1=value1:NoExecute-
+kubectl taint nodes worker01 key1=value1:NoExecute
+kubectl get pods -o wide
+kubectl taint nodes worker02 key1=value1:NoExecute
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+kubectl taint nodes worker02 key1=value1:NoSchedule
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[])"'
+kubectl taint nodes worker01 key1=value1:NoExecute-
+vi noschedule-pod1.yml 
+kubectl apply -f noschedule-pod1.yml 
+kubectl get pods -o wide
+kubectl edit pod noschedule-pod1 
+kubectl get pods -o wide
+kubectl delete pods noschedule-pod1 
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[])"'
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+kubectl apply -f noschedule-pod1.yml 
+kubectl get pods -o wide
+kubectl delete pod noschedule-pod1 
+vi noschedule-pod1.yml 
+kubectl apply -f noschedule-pod1.yml 
+kubectl get pods -o wide
+kubectl taint nodes worker01 key2=value2:NoSchedule
+kubectl delete pod noschedule-pod1 
+kubectl apply -f noschedule-pod1.yml 
+kubectl get pods -o wide
+vi noschedule-pod1.yml 
+kubectl delete pod noschedule-pod1 
+kubectl apply -f noschedule-pod1.yml 
+kubectl get pods -o wide
+kubectl taint node worker02 key2:value2:NoSchedule-
+kubectl taint node worker02 key2=value2:NoSchedule-
+kubectl get pods -o wide
+vi noschedule-pod
+vi noschedule-pod1.yml 
+kubectl taint node worker02 key1=value1:NoSchedule-
+vi noschedule-pod
+kubectl get pods -o wide
+kubectl taint node worker02 key1=value1:NoExecute-
+kubectl get pods -o wide
+kubectl taint node worker02 key1=value1:NoExecute
+kubectl get pods -o wide
+kubectl apply -f noschedule-pod1.yml 
+kubectl get pods -o wide
+kubectl edit pod noschedule-pod1 
+kubectl get pods -o wide
+kubectl edit pod noschedule-pod1 
+kubectl get pods -o wide
+kubectl edit pod noschedule-pod1 
+kubectl get pods -o wide
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+kubectl taint node worker01 key2=value2:NoSchedule-
+kubectl taint node worker01 key1=value1:NoExecute
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+kubectl taint node worker01 key1=value1:NoExecute-
+kubectl taint node worker02 key1=value1:NoExecute-
+kubectl get nodes -o json | jq -r '.items[] | "Node name: \(.metadata.name), Taints: \(.spec.taints[0])"'
+vi with-node-affinity.yml
+kubectl get nodes --show-labels 
+kubectl label nodes worker01 country=poland
+kubectl label nodes worker02 country=france
+vi with-node-affinity.yml
+kubectl label nodes worker02 env=production
+kubectl get pods
+kubectl apply -f with-node-affinity.yml
+kubectl get pods -o wide
+kubectl label nodes worker02 country=france-
+kubectl label nodes worker02 country-
+cp with-node-affinity.yml with-node-affinity-without-required.yml 
+vi with-node-affinity-without-required.yml
+kubectl apply -f with-node-affinity-without-required.yml
+vi with-node-affinity-without-required.yml
+kubectl apply -f with-node-affinity-without-required.yml
+kubectl get pods -o wide
+kubectl delete pod with-node-affinity-without-required
+kubectl delete pod with-node-affinity-withour-required 
+vi with-node-affinity-without-required.yml
+kubectl label nodes worker01 country-
+kubectl apply -f with-node-affinity-without-required.yml
+kubectl get pods -o wide
+kubectl label nodes worker02 country=france
+kubectl get pods -o wide
+kubectl delete pods --all
+wget https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz
+tar -xvf helm-v3.11.0-linux-amd64.tar.gz
+sudo cp linux-amd64/helm /usr/local/bin/helm
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm search repo nginx
+helm install nginx --generate-name
+helm install bitnami/nginx --generate-name
+kubectl get svc --namespace default -w nginx-1684403864
+kubectl get --namespace default -o jsonpath="{.spec.ports[0].port}" services nginx-1684403864
+kubectl get svc --namespace default nginx-1684403864 -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+helm 
+helm get 
+helm get all
+helm list
+kubectl get svc --namespace default nginx-1684403864 
+kubectl get svc --namespace default nginx-1684403864 -o jsonpath='{.spec.ports[0].nodePort}'
+curl -v http://192.168.1.100:30582
+curl  http://192.168.1.100:30582
+kubectl get pods,deploy -o wide
+kubectl get pods,deploy,svc -o wide
+helm search wordpress
+helm search hub wordpress
+heml install happy-panda bitnami/wordpress 
+helm install happy-panda bitnami/wordpress 
+kubectl get svc --namespace default happy-panda- -o jsonpath='{.spec.ports[0].nodePort}'
+kubectl get svc --namespace default happy-panda-wordpress -o jsonpath='{.spec.ports[0].nodePort}'
+helm list
+helm show values bitnami/wordpress
+kubectl get secret --namespace default happy-panda-wordpress -o jsonpath="{.data.wordpress-password}" | base64 -d
+helm get values happy-panda
+helm create myhelmchart
+ls -la 
+cd myhelmchart
+tree
+sudo apt  install tree -y
+tree
+vi Chart.yaml
+vi values.yaml 
+vi templates/service.yaml 
+vi values.yaml 
+vi templates/service.yaml 
+vi /tmp/index.html
+kubectl create configmap nginx-index-html-configmap --from-file /tmp/index.html 
+vi templates/deployment.yaml 
+vi templates/NOTES.txt
+helm lint .
+cd ..
+helm lint myhelmchart/
+helm package myhelmchart/
+helm install my-own-chart myhelmchart-0.1.0.tgz 
+rm myhelmchart-0.1.0.tgz
+cd myhelmchart/
+kubectl get cm nginx-index-html-configmap 
+kubectl get cm nginx-index-html-configmap -o yaml > templates/configmap.yaml
+vi templates/configmap.yaml
+cd ..
+helm lint myhelmchart/
+helm package myhelmchart/
+helm delete my-own-chart
+helm install my-own-chart myhelmchart-0.1.0.tgz 
+vi myhelmchart/templates/configmap.yaml
+rm myhelmchart-0.1.0.tgz 
+helm package myhelmchart/
+helm install my-own-chart myhelmchart-0.1.0.tgz 
+helm delete my-own-chart
+helm list
+kubectl edit configmaps nginx-index-html-configmap 
+kubectl delete configmaps nginx-index-html-configmap 
+helm install my-own-chart myhelmchart-0.1.0.tgz 
+kubectl get deploy
+kubectl get pods -o wide
+kubectl describe pod my-own-chart-myhelmchart-6656d6c485-lk64m 
+kubectl exec -it nginx-1684403864-64ddd8bb4d-xgzpn -- sh
+helm delete my-own-chart
+rm myhelmchart-0.1.0.tgz 
+vi myhelmchart/templates/deployment.yaml 
+helm package myhelmchart/
+helm install my-own-chart myhelmchart-0.1.0.tgz 
+kubectl get pods -o wide
+kubectl exec -it my-own-chart-myhelmchart-6d7874bb85-x5xrc -- sh
+vi myhelmchart/templates/deployment.yaml 
+vi myhelmchart/templates/configmap.yaml 
+vi myhelmchart/templates/deployment.yaml 
+vi myhelmchart/templates/configmap.yaml 
+rm myhelmchart/templates/ingress.yaml 
+rm myhelmchart/templates/service.yaml 
+rm myhelmchart/templates/serviceaccount.yaml 
+rm myhelmchart/templates/tests/ -rf
+cd myhelmchart/
+cd charts/
+ls
+ls -la
+cd ..
+rm charts/
+rm charts/ -rf
+tree
+rm templates/hpa.yaml 
+rm templates/_helpers.tpl 
+tree
+vi values.yaml 
+cd ..
+vi myhelmchart/templates/deployment.yaml 
+rm myhelmchart-0.1.0.tgz 
+helm package myhelmchart/
+helm delete my-own-helm
+helm list
+helm delete my-own-chart
+helm delete happy-panda
+helm delete nginx-1684403864
+kubectl delete deploy,pod --all
+helm install my-own-chart myhelmchart-0.1.0.tgz 
+vi myhelmchart/templates/deployment.yaml 
+helm install my-own-chart myhelmchart-0.1.0.tgz 
+helm package myhelmchart/
+helm install my-own-chart myhelmchart-0.1.0.tgz 
+cp -rp myhelmchart/templates/deployment.yaml /tmp/
+cp -rp myhelmchart/templates/configmap.yaml /tmp/
+cp -rp myhelmchart/templates/NOTES.txt /tmp
+rm -rf myhelmchart
+helm create myhelmchart
+cd myhelmchart
+ls
+vi values.yaml 
+cp /tmp/deployment.yaml  templates/
+vi templates/deployment.yaml 
+cp /tmp/configmap.yaml templates/
+cp /tmp/NOTES.txt templates/
+vi templates/service.yaml 
+vi templates/deployment.yaml 
+cd ..
+rm myhelmchart-0.1.0.tgz 
+helm package myhelmchart
+helm install my-own-chart myhelmchart-0.1.0.tgz 
+curl http://192.168.1.100:30080
+kubectl get cm
+kubectl describe pod my-own-hemlchart-846d6887-phgnx 
+kubectl exec -it my-own-hemlchart-846d6887-phgnx -- sh
+helm delete my-own-chart
+helm list
+ls -la *.yml
+kubectl get secrets 
+kubectl get secrets  nginx-htpasswd -o yaml 
+vi nginx-htpasswd.yaml
+cd myhelmchart/
+ls
+vi Chart.yaml 
+vi values.yaml 
+cd templates/
+ls
+rm hpa.yaml 
+rm ingress.yaml 
+vi NOTES.txt 
+rm serviceaccount.yaml 
+vi service.yaml 
+vi _helpers.tpl 
+rm configmap.yaml 
+ls -la
+rm deployment.yaml 
+cp ../../nginx-pod.yml .
+cp ../../nginx-config.yml .
+cp ../../nginx-htpasswd.yaml .
+mv nginx-pod.yml nginx-pod.yaml
+mv nginx-config.yml nginx-config.yaml 
+ls -la
+mv service.yaml nginx-service.yaml
+vi nginx-service.yaml
+vi NOTES.txt 
+vi nginx-service.yaml 
+cd ..
+cd myhelmchart/templates/
+vi nginx-pod.yaml
+vi nginx-config.yaml 
+cd myhelmchart/templates/
+vi nginx-pod.yaml
+mv nginx-config.yaml nginx-configmap.yaml
+vi nginx-pod.yaml
+vi nginx-htpasswd.yaml 
+mv nginx-htpasswd.yaml nginx-htpasswd-secret.yaml
+vi nginx-pod.yaml
+cd .. 
+cd ..
+helm lint myhelmchart
+rm myhelmchart
+rm myhelmchart-0.1.0.tgz 
+helm package myhelmchart
+helm package myhelmchart2
+helm install myhelmchart-0.1.0.tgz 
+helm install myhelmchart-0.1.0.tgz --generate-name
+curl http://192.168.1.100:30080
+curl http://192.168.1.100
+kubectl get pods
+kubectl get pods -o wide
+curl http://192.168.30.126
+kubectl get svc
+curl http://master:30080
+kubectl edit svc myhelmchart-0-1684408645 
+curl http://master:31111
+kubectl get svc
+curl http://10.96.87.167:31111
+curl http://10.96.87.167
+curl http://192.168.30.126
+curl http://192.168.30.126 -u marcin:student
+helm list
+helm delete myhelmchart-0-1684408645
+rm myhelmchart-0.1.0.tgz 
+cd myhelmchart/templates/
+ls -la
+vi nginx-configmap.yaml
+cp -rp nginx-configmap.yaml nginx-index-html.yaml
+ls -la ../../*.yml
+vi nginx-index-html.yaml
+vi nginx-pod.yaml 
+cd 
+ls -la
+helm package myhelmchart
+helm install myhelmchart-0.1.0.tgz --generate-name
+kubectl get pods -o wied
+kubectl get pods -o wide
+ls -la
+cd myhelmchart/
+ls -la
+tree
+vi templates/nginx-configmap.yaml
+vi templates/nginx-index-html.yaml 
+vi templates/nginx-
+vi templates/nginx-pod.yaml 
+cd ..
+helm list
+kubectl get pods -o wide
+helm delete myhelmchart-0-1684409126
+helm install myhelmchart-0.1.0.tgz --generate-name
+kubectl get pods -o wide
+ls -la
+vi web-pod.yml 
+cp -rp web-pod.yml dnstest-pods.yml
+vi dnstest-pods.yml
+kubectl get pods -o wide
+helm list
+helm delete myhelmchart-0-1684409439
+helm install myhelmchart-0.1.0.tgz 
+helm install myhelmchart-0.1.0.tgz  --generate-name
+helm list
+kubectl get pods -o wide
+helm delete myhelmchart-0-1684409903
+kubectl get pods -o wide
+kubectl apply -f dnstest-pods.yml 
+kubectl get pods -o wide
+kubectl exec -it busybox-dnstest -- curl 192.168.30.71
+kubectl exec -it busybox-dnstest -- curl 192-168-30-71.default.pod.cluster.local
+kubectl exec -it busybox-dnstest -- nslookup 192-168-30-71.default.pod.cluster.local
+kubectl create ns np-test
+kubectl label namespaces np-test env=dev
+kubectl get ns
+kubectl describe ns np-test 
+vi np-nginx.yml
+vi np-busybox.yml
+kubectl apply -f np-nginx.yml
+kubectl apply -f np-busybox.yml
+kubec get pods -o wide
+kubectl get pods -o wide -n np-test 
+kubectl -n np-test exec -it np-busybox -- curl http://192.168.5.25
+export NGINX_IP=192.168.5.25
+vi my-networkpolicy.yml
+kubectl apply -f my-networkpolicy.yml
+kubectl -n np-test exec -it np-busybox -- curl http://192.168.5.25
+kubectl edit networkpolicy -n np-test my-networkpolicy 
+kubectl -n np-test exec -it np-busybox -- curl http://192.168.5.25
+kubectl -n np-test exec -it np-nginx -- curl http://192-168-30-71.default.pod.cluster.local
+kubectl edit networkpolicy -n np-test my-networkpolicy 
+kubectl get pods
+kubectl get pods -o wide
+kubectl edit networkpolicy -n np-test my-networkpolicy 
+kubectl -n np-test exec -it np-nginx -- curl http://192-168-30-71.default.pod.cluster.local
+helm list
+ls -la *xz
+ls -la *
+ls -la
+helm package myhelmchart --version 0.1
+mv myhelmchart myhelmchart_v0.1
+cp myhelmchart_v0.1 myhelmchart_v1.0
+cp -rp myhelmchart_v0.1 myhelmchart_v1.0
+cd myhelmchart_v1.0
+cd templates/
+mv nginx-pod.yaml nginx-deployment.yaml
+vi nginx-service.yaml 
+vi nginx-deployment.yaml
+vi ../values.yaml 
+vi nginx-deployment.yaml
+vi nginx-service.yaml 
+vi ../values.yaml 
+vi nginx-deployment.yaml
+vi ../values.yaml 
+cd 
+helm package myhelmchart_v1.0 --version 1.0
+helm install secure-web myhelmchart-1.0.tgz 
+vi myhelmchart_v1.0/templates/nginx-deployment.yaml
+rm myhelmchart-1.0.tgz 
+helm package myhelmchart_v1.0 --version 1.0
+helm install secure-web myhelmchart-1.0.tgz 
+rm myhelmchart-1.0.tgz 
+vi myhelmchart_v1.0/templates/nginx-deployment.yaml
+rm myhelmchart-1.0.tgz 
+helm package myhelmchart_v1.0 --version 1.0
+helm install secure-web myhelmchart-1.0.tgz 
+helm list
+helm delete secure-web
+helm install secure-web myhelmchart-1.0.tgz 
+kubectl get deploy -o wide
+curl http://192.168.1.100:30080
+curl http://192.168.1.100:30080 -u marcin:student
+history

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-web
+  labels:
+    app: secure-web
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: secure-web
+  template:
+    metadata:
+      labels:
+        app: secure-web
+    spec:
+      volumes:
+      - name: config-volume
+        configMap:
+          name: nginx-configmap
+      - name: config-index
+        configMap:
+          name: nginx-index-html
+      - name: htpasswd-volume
+        secret:
+          secretName: nginx-htpasswd-secret
+      containers:
+      - name: nginx
+        image: nginx:1.19.1
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: config-volume
+            mountPath: /etc/nginx
+          - name: config-index
+            mountPath: /usr/share/nginx/html
+          - name: htpasswd-volume
+            mountPath: /etc/nginx/conf
