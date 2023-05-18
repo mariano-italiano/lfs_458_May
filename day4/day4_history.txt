@@ -497,4 +497,153 @@ helm install secure-web myhelmchart-1.0.tgz
 kubectl get deploy -o wide
 curl http://192.168.1.100:30080
 curl http://192.168.1.100:30080 -u marcin:student
+ls -la
+cd lfs_458_May/
+ls
+mkdir day4
+mv ../*.yml day4/
+cp -rp ../*.tgz day4/
+cp -rp ../myhelmchart_v* day4/
+git status
+git add .
 history
+history | awk '$1 > 860' | cut -c 8- > day4/day4_history.txt 
+vi day4/day4_history.txt
+git add .
+git commit -m "Adding day4 files"
+git push
+git pull
+git config pull.rebase false
+git pull
+git push
+cd
+ls -la
+helm list
+helm delete secure-web
+helm install myhelmchart-0.1.tgz
+helm install secure-web-0.1 myhelmchart-0.1.tgz
+helm install secure-web-pod myhelmchart-0.1.tgz
+helm list
+helm delete secure-web-0.1
+helm install secure-web-pod myhelmchart-0.1.tgz
+kubectl get pods -o wide
+curl http://192.168.5.26 -u marcin:student
+curl http://192.168.5.26
+helm delete secure-web-pod
+helm install secure-web-deploy myhelmchart-1.0.tgz 
+curl http://master:30080 
+curl http://master:30080 -u marcin:student
+kubectl get pods -o wide
+ls -la myhelmchart_v*
+ls -la myhelmchart_v*/templates
+vi myhelmchart_v1.0/templates/nginx-deployment.yaml
+vi myhelmchart_v1.0/values.yaml 
+helm list
+helm delete secure-web-deploy
+helm install secure-web-pod myhelmchart-0.1.tgz
+helm upgrade --version 1.0 myhelmchart-1.0.tgz 
+helm upgrade 1.0 myhelmchart-1.0.tgz 
+helm upgrade myhelmchart-1.0.tgz 1.0
+helm upgrade 0.1 myhelmchart-1.0.tgz 1.0
+vi pi-job.yml
+kubectl apply -f pi-job.yml
+kubectl get pods
+watch -n1 kubectl get pods
+kubectl logs pi-wt85k
+kubectl get jobs
+kubectl get jobs -o wide
+kubectl describe jobs.batch 
+kubectl get jobs
+vi sleep-job.yml
+kubectl apply -f sleep-job.yml
+kubectl get jobs.batch 
+kubectl get pods
+watch -n1 kubectl get pods
+kubectl get jobs.batch 
+watch -n1 kubectl get pods
+kubectl get jobs.batch 
+vi parallel-job.yml
+kubectl apply -f parallel-job.yml
+vi parallel-job.yml
+kubectl apply -f parallel-job.yml
+kubectl get jobs
+watch -n1 kubectl get pods
+kubectl get jobs
+kubectl delete jobs.batch parallel-job 
+kubectl get jobs
+watch -n1 kubectl get pods
+vi hello-cronjob.yml
+kubectl apply -f hello-cronjob.yml
+kubectl get jobs.batch 
+watch -n1 kubectl get jobs.batch 
+kubectl get jobs
+kubectl get pods
+watch -n1 kubectl get jobs.batch 
+kubectl get jobs
+kubectl logs hello-cronjob-28073596
+kubectl logs jobs/hello-cronjob-28073596
+kubectl logs jobs/hello-cronjob-28073597
+date
+kubectl delete cronjobs.batch hello-cronjob 
+kubectl get jobs
+kubectl get cronjob
+sudo journalctl -u kubelet.service 
+sudo journalctl -u containerd
+cd /var/lo
+cd /var/log
+ls -la
+cd containers
+ls -la
+ls
+cd ../pods/
+ls -la
+cd kube-system_kube-apiserver-master_3e2c36fdeae4fde2b64338c7d3c83041
+ls -la
+cd kube-apiserver/
+ls
+la -latr
+less 4.log
+sudo less 4.log
+cd ../../..
+ls -la
+kubectl logs -n kube-system kube-apiserver-master 
+kubectl get pods
+kubectl logs nginx-pod 
+kubectl events nginx-pod
+kubectl events 
+kubectl events | pod
+kubectl events | grep -i pod
+kubectl events | grep -i nginx-pod
+kubectl run buggy-pod --image=pause:3.1 --restart=Never
+kubectl get pods
+kubectl run buggy-pod --image=registry.k8s.io/pause:3.1 --restart=Never
+kubectl delete pod buggy-pod 
+kubectl run buggy-pod --image=registry.k8s.io/pause:3.1 --restart=Never
+kubectl get pods
+kubectl exec -it buggy-pod -- sh
+kubectl exec -it buggy-pod -- bash
+kubectl get pods
+kubectl debug -it buggy-pod --image=radial/busyboxplus:curl --target=buggy-pod
+cd
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl get pods -n kube-system 
+kubectl logs metrics-server-6f6cdbf67d-mm5cl -n kube-system 
+kubectl -n kube-system events | grep -i metric-server
+kubectl -n kube-system edit pod metrics-server-6f6cdbf67d-mm5cl 
+kubectl get pods -n kube-system 
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+kubectl get pods -n kube-system 
+kubectl get pods -A
+kubectl -n kubernetes-dashboard get all
+vi admin-user.yml
+kubectl apply -f admin-user.yml
+kubectl get clusterrolebindings.rbac.authorization.k8s.io cluster-admin 
+kubectl get clusterrole cluster-admin -o yaml
+vi admin-user-binding.yml
+kubectl apply -f admin-user-binding.yml
+kubectl get clusterrolebindings.rbac.authorization.k8s.io 
+kubectl -n kubernetes-dashboard create token admin-user
+kubectl proxy
+cd lfs_458_May/day4/
+history
+history | awk '$1 > 860' | cut -c 8- > day4_history.txt

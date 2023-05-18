@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: parallel-job
+  labels:
+    app: echo
+spec:
+  parallelism: 4
+  completions: 12
+  template:
+    metadata:
+      labels:
+        app: echo
+    spec:
+      containers:
+      - name: echo
+        image: busybox
+        command: ["sh", "-c", "echo test parallel jobs; sleep 15"]
+      restartPolicy: Never
